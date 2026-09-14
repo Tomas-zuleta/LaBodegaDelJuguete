@@ -311,3 +311,53 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
+html {
+  scroll-behavior: smooth;
+}
+.info-section {
+  padding: 80px 20px;
+  text-align: center;
+  background: #f9f9f9;
+  margin-top: 40px;
+}
+
+.info-section h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.info-section p {
+  max-width: 600px;
+  margin: auto;
+  font-size: 16px;
+  color: #555;
+}
+.page {
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.page h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.page p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.page ul {
+  list-style: none;
+  padding: 0;
+}
+
+.page ul li {
+  background: #fff;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}

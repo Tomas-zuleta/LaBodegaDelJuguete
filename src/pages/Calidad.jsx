@@ -1,0 +1,18 @@
+export default function Calidad() {
+  return (
+    <div className="page">
+      <h1>Calidad garantizada</h1>
+
+      <p>
+        Nos aseguramos de ofrecer productos de alta calidad para nuestros clientes.
+      </p>
+
+      <ul>
+        <li>⭐ Productos seleccionados</li>
+        <li>🧸 Materiales resistentes</li>
+        <li>🔍 Control de calidad</li>
+        <li>💯 Satisfacción garantizada</li>
+      </ul>
+    </div>
+  );
+}

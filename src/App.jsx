@@ -5,6 +5,10 @@ import Home from "./pages/Home";
 import Nosotros from "./pages/Nosotros";
 import Productos from "./pages/Productos";
 import Contacto from "./pages/Contacto";
+import Variedad from "./pages/Variedad";
+import Precios from "./pages/Precios";
+import Envios from "./pages/Envios";
+import Calidad from "./pages/Calidad";
 
 function App() {
   return (
@@ -16,6 +20,10 @@ function App() {
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/contacto" element={<Contacto />} />
+        <Route path="/variedad" element={<Variedad />} />
+        <Route path="/precios" element={<Precios />} />
+        <Route path="/envios" element={<Envios />} />
+        <Route path="/calidad" element={<Calidad />} />
       </Routes>
     </BrowserRouter>
   );
