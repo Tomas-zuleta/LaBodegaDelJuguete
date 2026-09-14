@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function Calidad() {
   return (
     <div className="page">
@@ -14,8 +15,8 @@ export default function Calidad() {
         <li>💯 Satisfacción garantizada</li>
       </ul>
       <Link to="/" className="back-btn">
-  ⬅ Volver al inicio
-</Link>
+              ⬅ Volver al inicio
+            </Link>
     </div>
   );
 }
