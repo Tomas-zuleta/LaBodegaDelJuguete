@@ -6,8 +6,8 @@ export default function Navbar() {
 
       {/* LOGO */}
       <div className="logo">
-        <img src="/logo.png" alt="logo" />
-        <span>Anime Store</span>
+        <img src="/logo.jpg" alt="logo" />
+        <span>La Bodega del Juguete</span>
       </div>
 
       {/* LINKS */}
