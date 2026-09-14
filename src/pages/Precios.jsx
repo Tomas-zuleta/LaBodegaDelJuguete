@@ -13,7 +13,13 @@ export default function Precios() {
         <li>🏪 Precios especiales para revendedores</li>
         <li>📦 Combos económicos</li>
         <li>🤝 Mejores precios del mercado</li>
+        <Link to="/" className="back-btn">
+  ⬅ Volver al inicio
+</Link>
       </ul>
     </div>
+    
+    
+
   );
 }

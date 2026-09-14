@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Variedad() {
   return (
     <div className="page">
@@ -13,6 +15,10 @@ export default function Variedad() {
         <li>Figuras de anime</li>
         <li>Regalos personalizados</li>
       </ul>
+
+      <Link to="/" className="back-btn">
+        ⬅ Volver al inicio
+      </Link>
     </div>
   );
 }

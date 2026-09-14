@@ -13,6 +13,9 @@ export default function Envios() {
         <li>⏱ Entregas rápidas</li>
         <li>📍 Seguimiento de pedidos</li>
       </ul>
+      <Link to="/" className="back-btn">
+  ⬅ Volver al inicio
+</Link>
     </div>
   );
 }
