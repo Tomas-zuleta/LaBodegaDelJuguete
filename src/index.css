@@ -1,58 +1,102 @@
 body {
   margin: 0;
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
+  font-family: Arial, sans-serif;
+  background: #ffffff; /* fondo blanco */
+  color: #111;
 }
 
+/* NAVBAR */
 header {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
-  background: black;
-}
-
-header a {
+  align-items: center;
+  padding: 15px 20px;
+  background: #000;
   color: white;
-  margin: 0 10px;
-  text-decoration: none;
 }
 
+header h1 {
+  color: #3b82f6; /* azul */
+}
+
+header nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* HERO */
 .hero {
   text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(black, #0f172a);
+  padding: 80px 20px;
 }
 
+.hero h2 {
+  font-size: 2rem;
+}
+
+.hero p {
+  color: #555;
+}
+
+/* BOTONES */
 .btn {
-  background: blue;
-  padding: 10px 20px;
+  background: #3b82f6; /* azul */
+  color: white;
+  padding: 12px 20px;
   margin: 10px;
   display: inline-block;
-  color: white;
   border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #2563eb;
 }
 
 .btn-whatsapp {
-  background: red;
+  background: #ef4444; /* rojo */
 }
 
+.btn-whatsapp:hover {
+  background: #dc2626;
+}
+
+/* PRODUCTOS */
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
+  padding: 20px;
 }
 
 .card {
-  background: #111;
-  padding: 10px;
-  border-radius: 10px;
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
   text-align: center;
-  box-shadow: 0 0 10px blue;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .card img {
   width: 100%;
   border-radius: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero {
+    padding: 50px 15px;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero h2 {
+    font-size: 1.5rem;
+  }
 }

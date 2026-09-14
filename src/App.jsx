@@ -21,4 +21,22 @@ function App() {
   );
 }
 
+<a
+  href="https://wa.me/573226075952"
+  target="_blank"
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    background: "#25D366",
+    color: "white",
+    padding: "15px",
+    borderRadius: "50%",
+    textDecoration: "none",
+    fontSize: "20px"
+  }}
+>
+  💬
+</a>
+
 export default App;
