@@ -2,21 +2,59 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <section className="hero">
-      <h2>Tu mundo anime en Medellín</h2>
-      <p>Figuras, mangas y coleccionables</p>
+    <>
+      <section className="hero-banner">
+        <div className="overlay">
 
-      <Link to="/productos" className="btn">
-        Ver catálogo
-      </Link>
+          <h1>La Bodega del Juguete</h1>
 
-      <a
-        href="https://wa.me/573226075952"
-        className="btn btn-whatsapp"
-        target="_blank"
-      >
-        WhatsApp
-      </a>
-    </section>
+          <p>
+            Venta al mayor y detal <br />
+            Piñatería y juguetería
+          </p>
+
+          <div className="hero-buttons">
+            <Link to="/productos" className="btn">
+              Ver catálogo
+            </Link>
+
+            <a
+              href="https://wa.me/573226075952"
+              target="_blank"
+              className="btn btn-whatsapp"
+            >
+              Comprar por WhatsApp
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECCIONES */}
+      <section className="features fade-in">
+        <h2>¿Por qué elegirnos?</h2>
+        <div className="features-grid">
+          <div>🎁 Gran variedad</div>
+          <div>💰 Precios al mayor</div>
+          <div>🚚 Envíos rápidos</div>
+          <div>⭐ Calidad garantizada</div>
+        </div>
+      </section>
+
+      <section className="categories fade-in">
+        <h2>Categorías</h2>
+        <div className="categories-grid">
+          <div className="cat-card">🎌 Anime</div>
+          <div className="cat-card">🧸 Juguetería</div>
+        </div>
+      </section>
+
+      <section className="cta fade-in">
+        <h2>¿Listo para comprar?</h2>
+        <a href="https://wa.me/573226075952" className="btn btn-whatsapp">
+          Escríbenos ahora
+        </a>
+      </section>
+    </>
   );
 }

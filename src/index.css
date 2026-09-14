@@ -209,3 +209,78 @@ body {
     font-size: 1.6rem;
   }
 }
+/* HERO BANNER */
+.hero-banner {
+  height: 90vh;
+  background: url("https://images.unsplash.com/photo-1608889175123-8ee362201f81") center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  background: rgba(0,0,0,0.6);
+  padding: 40px;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+}
+
+.overlay h1 {
+  font-size: 3rem;
+  color: #3b82f6;
+}
+
+.overlay p {
+  margin: 15px 0;
+  font-size: 1.2rem;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+}
+
+/* FEATURES */
+.features {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: 20px;
+  gap: 20px;
+}
+
+/* CATEGORÍAS */
+.categories {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.cat-card {
+  background: #f3f4f6;
+  padding: 40px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cat-card:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+  padding: 60px 20px;
+}
