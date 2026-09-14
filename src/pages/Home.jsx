@@ -33,12 +33,12 @@ export default function Home() {
       {/* SECCIONES */}
       <section className="features fade-in">
         <h2>¿Por qué elegirnos?</h2>
-        <div className="features-grid">
-          <div>🎁 Gran variedad</div>
-          <div>💰 Precios al mayor</div>
-          <div>🚚 Envíos rápidos</div>
-          <div>⭐ Calidad garantizada</div>
-        </div>
+       <div className="features-grid">
+  <div className="feature-card">🎁<p>Gran variedad</p></div>
+  <div className="feature-card">💰<p>Precios al mayor</p></div>
+  <div className="feature-card">🚚<p>Envíos rápidos</p></div>
+  <div className="feature-card">⭐<p>Calidad garantizada</p></div>
+</div>
       </section>
 
       <section className="categories fade-in">
