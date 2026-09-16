@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 export default function Precios() {
   return (
-    <div className="page">
+    <div className="page" data-aos="fade-up">
       <h1>Precios al mayor</h1>
 
       <p>

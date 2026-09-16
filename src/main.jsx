@@ -11,4 +11,11 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 )
 
-AOS.init();
+AOS.init({
+  duration: 700,
+  once: false,
+  mirror: true,
+  offset: 40,
+  easing: 'ease-out-cubic',
+  delay: 80,
+});

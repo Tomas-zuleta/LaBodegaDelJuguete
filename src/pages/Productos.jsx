@@ -20,7 +20,7 @@ export default function Productos() {
   });
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px" }} data-aos="fade-up">
       <h2>Productos</h2>
 
       {/* FILTROS */}

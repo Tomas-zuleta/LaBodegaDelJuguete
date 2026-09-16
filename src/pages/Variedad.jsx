@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Variedad() {
   return (
-    <div className="page">
+    <div className="page" data-aos="fade-up">
       <h1>Gran variedad</h1>
 
       <p>

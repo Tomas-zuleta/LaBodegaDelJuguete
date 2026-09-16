@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 export default function Envios() {
   return (
-    <div className="page">
+    <div className="page" data-aos="fade-up">
       <h1>Envíos rápidos</h1>
 
       <p>
