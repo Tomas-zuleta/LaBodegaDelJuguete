@@ -1,4 +1,34 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+function AnimatedNumber({ end, suffix = "", duration = 1800 }) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const startTime = performance.now();
+
+    const update = (now) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const next = Math.round(start + (end - start) * eased);
+      setValue(next);
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    };
+
+    requestAnimationFrame(update);
+  }, [end, duration]);
+
+  return (
+    <h3>
+      {value}
+      {suffix}
+    </h3>
+  );
+}
 
 export default function Home() {
   return (
@@ -129,22 +159,22 @@ export default function Home() {
 
         <div className="stats-grid">
           <div className="stat-card">
-            <h3>500+</h3>
+            <AnimatedNumber end={500} suffix="+" />
             <p>Productos disponibles</p>
           </div>
 
           <div className="stat-card">
-            <h3>1000+</h3>
+            <AnimatedNumber end={1000} suffix="+" />
             <p>Clientes felices</p>
           </div>
 
           <div className="stat-card">
-            <h3>24H</h3>
+            <AnimatedNumber end={24} suffix="H" />
             <p>Envíos rápidos</p>
           </div>
 
           <div className="stat-card">
-            <h3>100%</h3>
+            <AnimatedNumber end={100} suffix="%" />
             <p>Calidad garantizada</p>
           </div>
         </div>
