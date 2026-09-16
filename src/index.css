@@ -843,7 +843,7 @@ html {
 
 .footer-section h3 {
   margin-bottom: 10px;
-  color: #ef4444; /* rojo */
+  color: #3b82f6; /* azul */
 }
 
 .footer-section p,
@@ -1042,6 +1042,26 @@ html {
   font-size: 36px;
   color: #2563eb;
   margin-bottom: 10px;
+}
+
+.stat-number {
+  display: inline-block;
+  animation: statNumberIn 1.1s ease-out;
+}
+
+@keyframes statNumberIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .stat-card p {
