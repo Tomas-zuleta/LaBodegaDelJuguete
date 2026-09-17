@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { categories } from "../data/categories";
 
 export default function Home() {
   return (
@@ -38,55 +39,16 @@ export default function Home() {
         <h2>Categorías populares</h2>
 
         <div className="categories-scroll">
-          <div className="cat-item">
-            <div className="circle">🧸</div>
-            <p>Juguetería</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🎉</div>
-            <p>Piñatería</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🎌</div>
-            <p>Anime</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🚗</div>
-            <p>Carros</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🧩</div>
-            <p>Coleccionables</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🎲</div>
-            <p>Juegos de mesa</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🟢</div>
-            <p>Slime</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🔑</div>
-            <p>Llaveros</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🧃</div>
-            <p>Squeezys</p>
-          </div>
-
-          <div className="cat-item">
-            <div className="circle">🥤</div>
-            <p>Termos</p>
-          </div>
+          {categories.map((category) => (
+            <Link
+              to={`/productos?categoria=${category.slug}`}
+              className="cat-item"
+              key={category.slug}
+            >
+              <div className="circle">{category.icon}</div>
+              <p>{category.name}</p>
+            </Link>
+          ))}
         </div>
       </section>
 

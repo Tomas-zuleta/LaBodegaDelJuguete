@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ cartCount }) {
   return (
     <header className="navbar">
 
@@ -16,6 +16,9 @@ export default function Navbar() {
         <Link to="/nosotros">Nosotros</Link>
         <Link to="/productos">Productos</Link>
         <Link to="/contacto">Contacto</Link>
+        <Link to="/carrito" className="cart-link" aria-label={`Carrito con ${cartCount} productos`}>
+          🛒 <span>Carrito</span><strong>{cartCount}</strong>
+        </Link>
       </nav>
 
     </header>

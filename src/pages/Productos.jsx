@@ -1,22 +1,41 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { products } from "../data/products";
+import { categories } from "../data/categories";
 import ProductCard from "../components/ProductCard";
 
-export default function Productos() {
-  const [category, setCategory] = useState("all");
-  const [anime, setAnime] = useState("all");
+const categoryFilters = {
+  jugueteria: ["Figuras", "Bloques", "Cocinas"],
+  pinateria: ["Decoración", "Piñatas"],
+  anime: ["Dragon Ball", "Naruto", "One Piece"],
+  carros: ["Control remoto", "Construcción"],
+  coleccionables: ["Astronautas", "Figuras"],
+  "juegos-de-mesa": ["Juegos familiares", "Rompecabezas"],
+  slime: ["Brillante", "Con figuras"],
+  llaveros: ["Peluche", "Coleccionables"],
+  squeezys: ["Animales", "Antiestrés"],
+  termos: ["Infantiles", "Deportivos"],
+};
+
+export default function Productos({ onAddToCart }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedCategory = searchParams.get("categoria") || "all";
+  const category = selectedCategory;
+  const [subcategory, setSubcategory] = useState("all");
+  const [search, setSearch] = useState("");
+  const availableFilters = categoryFilters[category] || [];
+  const activeSubcategory = availableFilters.includes(subcategory) ? subcategory : "all";
 
   const filteredProducts = products.filter((p) => {
-    if (category === "all") return true;
+    if (category !== "all" && p.category !== category) return false;
+    if (activeSubcategory !== "all" && (p.anime || p.subcategory) !== activeSubcategory) return false;
 
-    if (category === "jugueteria") {
-      return p.category === "jugueteria";
-    }
+    const searchText = search.trim().toLowerCase();
+    if (!searchText) return true;
 
-    if (category === "anime") {
-      if (anime === "all") return p.category === "anime";
-      return p.anime === anime;
-    }
+    return [p.name, p.category, p.anime]
+      .filter(Boolean)
+      .some((value) => value.toLowerCase().includes(searchText));
   });
 
   return (
@@ -25,23 +44,34 @@ export default function Productos() {
 
       {/* FILTROS */}
       <div className="filters">
+        <input
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Buscar productos..."
+          aria-label="Buscar productos"
+        />
 
-        <select onChange={(e) => setCategory(e.target.value)}>
+        <select
+          value={category}
+          onChange={(e) => {
+            const nextCategory = e.target.value;
+            setSearchParams(nextCategory === "all" ? {} : { categoria: nextCategory });
+            setSubcategory("all");
+          }}
+        >
           <option value="all">Todo</option>
-          <option value="anime">Anime</option>
-          <option value="jugueteria">Juguetería</option>
+          {categories.map((item) => (
+            <option value={item.slug} key={item.slug}>{item.name}</option>
+          ))}
         </select>
 
-        {category === "anime" && (
-          <select onChange={(e) => setAnime(e.target.value)}>
-            <option value="all">Todos los animes</option>
-            <option>Dragon Ball</option>
-            <option>Naruto</option>
-            <option>One Piece</option>
-            <option>Demon Slayer</option>
-            <option>One Punch Man</option>
-            <option>Caballeros del Zodiaco</option>
-            <option>Jojo's Bizarre Adventure</option>
+        {availableFilters.length > 0 && (
+          <select value={activeSubcategory} onChange={(e) => setSubcategory(e.target.value)}>
+            <option value="all">Todas las opciones</option>
+            {availableFilters.map((filter) => (
+              <option key={filter} value={filter}>{filter}</option>
+            ))}
           </select>
         )}
 
@@ -50,7 +80,7 @@ export default function Productos() {
       {/* PRODUCTOS */}
       <div className="products">
         {filteredProducts.map((p) => (
-          <ProductCard key={p.id} product={p} />
+          <ProductCard key={p.id} product={p} onAddToCart={onAddToCart} />
         ))}
       </div>
     </div>
