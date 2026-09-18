@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 const WHATSAPP_NUMBER = "573226075952";
+const WHOLESALE_THRESHOLD = 12;
+const WHOLESALE_RATE = 0.1;
+const WHOLESALE_CATEGORIES = new Set(["jugueteria", "pinateria"]);
 
 const formatPrice = (price) =>
   new Intl.NumberFormat("es-CO", {
@@ -10,13 +13,26 @@ const formatPrice = (price) =>
   }).format(price);
 
 export default function Cart({ cart, onUpdateQuantity, onRemove }) {
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const wholesaleQuantity = cart
+    .filter((item) => WHOLESALE_CATEGORIES.has(item.category))
+    .reduce((sum, item) => sum + item.quantity, 0);
+  const wholesaleSubtotal = cart
+    .filter((item) => WHOLESALE_CATEGORIES.has(item.category))
+    .reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const wholesaleDiscount = wholesaleQuantity >= WHOLESALE_THRESHOLD
+    ? wholesaleSubtotal * WHOLESALE_RATE
+    : 0;
+  const total = subtotal - wholesaleDiscount;
 
   const sendOrderToWhatsApp = () => {
     const productsMessage = cart
       .map((item) => `- ${item.name} x${item.quantity}: ${formatPrice(item.price * item.quantity)}`)
       .join("\n");
-    const message = `Hola, quiero hacer este pedido:\n${productsMessage}\n\nTotal estimado: ${formatPrice(total)}`;
+    const discountMessage = wholesaleDiscount > 0
+      ? `\nDescuento mayorista (10%): -${formatPrice(wholesaleDiscount)}`
+      : "";
+    const message = `Hola, quiero hacer este pedido:\n${productsMessage}${discountMessage}\n\nTotal estimado: ${formatPrice(total)}`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
@@ -73,9 +89,24 @@ export default function Cart({ cart, onUpdateQuantity, onRemove }) {
         <aside className="cart-summary" data-aos="fade-left">
           <h2>Resumen del pedido</h2>
           <div className="summary-line">
-            <span>Productos</span>
+            <span>Subtotal</span>
+            <strong>{formatPrice(subtotal)}</strong>
+          </div>
+          {wholesaleDiscount > 0 && (
+            <div className="summary-line discount-line">
+              <span>Descuento mayorista</span>
+              <strong>-{formatPrice(wholesaleDiscount)}</strong>
+            </div>
+          )}
+          <div className="summary-line summary-total">
+            <span>Total</span>
             <strong>{formatPrice(total)}</strong>
           </div>
+          <p className="wholesale-status">
+            {wholesaleDiscount > 0
+              ? "Descuento mayorista aplicado por comprar 12 o más artículos de juguetería o piñatería."
+              : `Compra ${Math.max(WHOLESALE_THRESHOLD - wholesaleQuantity, 0)} artículos más de juguetería o piñatería para activar el descuento mayorista.`}
+          </p>
           <p>El valor del envío se confirma por WhatsApp según tu ubicación.</p>
           <button type="button" className="btn btn-whatsapp checkout-button" onClick={sendOrderToWhatsApp}>
             Comprar por WhatsApp
