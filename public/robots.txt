@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://la-bodega-del-juguete.vercel.app/sitemap.xml
