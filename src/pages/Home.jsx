@@ -1,19 +1,127 @@
+import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { categories } from "../data/categories";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Home() {
+  const homeRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const home = homeRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!home || reduceMotion) return undefined;
+
+    const context = gsap.context(() => {
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      intro
+        .from(".hero-content > *", { y: 28, autoAlpha: 0, duration: 0.7, stagger: 0.1 })
+        .from(".hero-logo", { scale: 0.35, x: 90, y: 30, autoAlpha: 0, rotate: 18, duration: 1.1 }, "-=0.45");
+
+      gsap.to(".hero-logo", {
+        yPercent: 5,
+        rotate: -2,
+        scale: 1.02,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-banner",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+      gsap.to(".overlay", {
+        yPercent: -8,
+        ease: "none",
+        scrollTrigger: { trigger: ".hero-banner", start: "top top", end: "bottom top", scrub: 1 },
+      });
+
+      gsap.from(".categories-modern h2", {
+        y: 36,
+        autoAlpha: 0,
+        duration: 0.8,
+        scrollTrigger: { trigger: ".categories-modern", start: "top 82%", toggleActions: "play none none reverse" },
+      });
+
+      gsap.from(".cat-item", {
+        y: 34,
+        rotate: (index) => index % 2 ? 5 : -5,
+        autoAlpha: 0,
+        duration: 0.7,
+        stagger: 0.07,
+        ease: "back.out(1.4)",
+        immediateRender: false,
+        scrollTrigger: { trigger: ".categories-scroll", start: "top 86%", toggleActions: "play none none reverse" },
+      });
+
+      gsap.from(".info-image", {
+        x: -100,
+        rotate: -8,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".info-section", start: "top 76%", toggleActions: "play none none reverse" },
+      });
+
+      gsap.from(".info-text h2, .info-item", {
+        x: 70,
+        autoAlpha: 0,
+        duration: 0.75,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".info-text", start: "top 78%", toggleActions: "play none none reverse" },
+      });
+
+      gsap.from(".stat-card", {
+        y: 55,
+        scale: 0.88,
+        autoAlpha: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".stats-grid", start: "top 82%", toggleActions: "play none none reverse" },
+      });
+
+      gsap.from(".cta > *", {
+        y: 30,
+        autoAlpha: 0,
+        duration: 0.7,
+        stagger: 0.14,
+        ease: "power2.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: ".cta", start: "top 84%", toggleActions: "play none none reverse" },
+      });
+    }, home);
+
+    return () => context.revert();
+  }, []);
+
   return (
-    <>
+    <div ref={homeRef}>
       {/* ================= HERO ================= */}
       <section className="hero-banner" data-aos="fade-down">
+        <div className="hero-noise" aria-hidden="true" />
+        <span className="hero-spark hero-spark-one" aria-hidden="true" />
+        <span className="hero-spark hero-spark-two" aria-hidden="true" />
+        <span className="hero-spark hero-spark-three" aria-hidden="true" />
+        <img
+          className="hero-logo"
+          src="/logo.png"
+          alt="La Bodega del Juguete"
+        />
         <div className="overlay">
           <div className="hero-content">
-            <span className="eyebrow">Venta al mayor y detal</span>
-            <h1>La Bodega del Juguete</h1>
+            <span className="eyebrow">La Bodega Del Jueguete </span>
+            <h1>Juega. Colecciona. Repite.</h1>
 
             <p>
-              Venta al mayor y detal <br />
-              Piñatería y juguetería
+              Jugueteria y Anime que convierten<br />
+              cualquier día en una aventura.
             </p>
 
             <div className="hero-buttons">
@@ -35,7 +143,7 @@ export default function Home() {
       </section>
 
       {/* ================= CATEGORÍAS ================= */}
-      <section className="categories-modern" data-aos="fade-up">
+      <section className="categories-modern home-reveal" data-aos="fade-up">
         <h2>Categorías populares</h2>
 
         <div className="categories-scroll">
@@ -45,15 +153,18 @@ export default function Home() {
               className="cat-item"
               key={category.slug}
             >
-              <div className="circle">{category.icon}</div>
-              <p>{category.name}</p>
+              <div className="circle" aria-hidden="true">{category.icon}</div>
+              <div className="cat-copy">
+                <p>{category.name}</p>
+                <span>Explorar categoría <b aria-hidden="true">↗</b></span>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
       {/* ================= INFO ================= */}
-      <section className="info-section fade-in" data-aos="fade-up">
+      <section className="info-section home-reveal" data-aos="fade-up">
         <div className="info-container">
           <div className="info-image">
             <img src="/logo.png" alt="La Bodega del Juguete" />
@@ -86,7 +197,7 @@ export default function Home() {
       </section>
 
       {/* ================= STATS ================= */}
-      <section className="stats-section fade-in" data-aos="zoom-in-up">
+      <section className="stats-section home-reveal" data-aos="zoom-in-up">
         <h2>¿Por qué elegirnos?</h2>
 
         <div className="stats-grid">
@@ -113,7 +224,7 @@ export default function Home() {
       </section>
 
       {/* ================= CTA ================= */}
-      <section className="cta fade-in" data-aos="fade-up">
+      <section className="cta home-reveal" data-aos="fade-up">
         <h2>¿Listo para comprar?</h2>
 
         <a
@@ -125,6 +236,6 @@ export default function Home() {
           Escríbenos ahora
         </a>
       </section>
-    </>
+    </div>
   );
 }

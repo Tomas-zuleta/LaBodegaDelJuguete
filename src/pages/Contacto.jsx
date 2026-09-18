@@ -2,7 +2,7 @@ export default function Contacto() {
   return (
     <section className="contact-page" data-aos="fade-up">
       <div className="contact-layout">
-        <div className="contact-map-card">
+        <div className="contact-map-card" data-aos="fade-right">
           <span className="section-label">Nuestra ubicación</span>
           <h2>Visítanos</h2>
 
@@ -26,7 +26,7 @@ export default function Contacto() {
           </div>
         </div>
 
-        <div className="contact-info-card">
+        <div className="contact-info-card" data-aos="fade-left">
           <span className="section-label">Contacto</span>
           <h2>La Bodega del Juguete</h2>
           <p className="contact-description">
@@ -34,7 +34,7 @@ export default function Contacto() {
           </p>
 
           <div className="contact-list">
-            <div className="contact-item">
+            <div className="contact-item" data-aos="fade-up">
               <span className="icon">📍</span>
               <div>
                 <h3>Dirección</h3>
@@ -42,7 +42,7 @@ export default function Contacto() {
               </div>
             </div>
 
-            <div className="contact-item">
+            <div className="contact-item" data-aos="fade-up">
               <span className="icon">📞</span>
               <div>
                 <h3>WhatsApp</h3>
@@ -50,7 +50,7 @@ export default function Contacto() {
               </div>
             </div>
 
-            <div className="contact-item">
+            <div className="contact-item" data-aos="fade-up">
               <span className="icon">⏰</span>
               <div>
                 <h3>Atención</h3>

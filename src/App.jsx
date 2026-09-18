@@ -22,12 +22,21 @@ function App() {
       return [];
     }
   });
+  const [notice, setNotice] = useState("");
 
   useEffect(() => {
     localStorage.setItem("la-bodega-carrito", JSON.stringify(cart));
   }, [cart]);
 
+  useEffect(() => {
+    if (!notice) return undefined;
+
+    const timeoutId = window.setTimeout(() => setNotice(""), 2800);
+    return () => window.clearTimeout(timeoutId);
+  }, [notice]);
+
   const addToCart = (product) => {
+    setNotice(`${product.name} se agrego al carrito`);
     setCart((currentCart) => {
       const existingProduct = currentCart.find((item) => item.id === product.id);
 
@@ -93,6 +102,13 @@ function App() {
         </a>
 
         <Footer />
+
+        {notice && (
+          <div className="cart-toast" role="status" aria-live="polite">
+            <span aria-hidden="true">✓</span>
+            {notice}
+          </div>
+        )}
       </div>
     </BrowserRouter>
   );

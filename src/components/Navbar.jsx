@@ -1,26 +1,74 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { gsap } from "gsap";
 
 export default function Navbar({ cartCount }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (!menuRef.current) return undefined;
+
+    const menuItems = menuRef.current.querySelectorAll("a");
+    gsap.fromTo(
+      menuItems,
+      { y: -12, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.35, stagger: 0.06, ease: "power2.out" }
+    );
+
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <header className="navbar">
+      <Link to="/" className="logo" onClick={closeMenu}>
+        <img src="/logo.png" alt="La Bodega del Juguete" />
+        <span>La Bodega <b>del Juguete</b></span>
+      </Link>
 
-      {/* LOGO */}
-      <div className="logo">
-        <img src="/logo.png" alt="logo" />
-        <span>La Bodega del Juguete</span>
-      </div>
+      <button
+        className={`menu-toggle${menuOpen ? " is-open" : ""}`}
+        type="button"
+        aria-expanded={menuOpen}
+        aria-controls="main-navigation"
+        aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+        onClick={() => setMenuOpen((open) => !open)}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
 
-      {/* LINKS */}
-      <nav className="nav-links">
-        <Link to="/">Inicio</Link>
-        <Link to="/nosotros">Nosotros</Link>
-        <Link to="/productos">Productos</Link>
-        <Link to="/contacto">Contacto</Link>
-        <Link to="/carrito" className="cart-link" aria-label={`Carrito con ${cartCount} productos`}>
-          🛒 <span>Carrito</span><strong>{cartCount}</strong>
+      <nav
+        id="main-navigation"
+        ref={menuRef}
+        className={`nav-links${menuOpen ? " is-open" : ""}`}
+      >
+        <Link to="/" className="menu-brand" onClick={closeMenu}>
+          <img src="/logo.png" alt="La Bodega del Juguete" />
+          <span>La Bodega<br /><b>del Juguete</b></span>
         </Link>
-      </nav>
 
+        <div className="menu-list">
+          <Link to="/" onClick={closeMenu}><span>Inicio</span><i aria-hidden="true">↗</i></Link>
+          <Link to="/nosotros" onClick={closeMenu}><span>Nosotros</span><i aria-hidden="true">?</i></Link>
+          <Link to="/productos" onClick={closeMenu}><span>Productos</span><i aria-hidden="true">▣</i></Link>
+          <Link to="/contacto" onClick={closeMenu}><span>Contacto</span><i aria-hidden="true">✉</i></Link>
+          <Link to="/carrito" className="cart-link" aria-label={`Carrito con ${cartCount} productos`} onClick={closeMenu}>
+            <span>Carrito</span>
+            <span className="cart-icon-wrap">
+              <i aria-hidden="true">🛒</i>
+              {cartCount > 0 && <strong>{cartCount}</strong>}
+            </span>
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 }

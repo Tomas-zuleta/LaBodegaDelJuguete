@@ -38,7 +38,8 @@ export const products = [
     price: 45000,
     category: "jugueteria",
     subcategory: "Bloques",
-    image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=600&q=80"
+    image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=600&q=80",
+    demo360: true
   },
   {
     id: 6,

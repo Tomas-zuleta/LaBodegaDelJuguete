@@ -44,8 +44,15 @@ export default function Cart({ cart, onUpdateQuantity, onRemove }) {
       <div className="cart-layout">
         <div className="cart-items">
           {cart.map((item) => (
-            <article className="cart-item" key={item.id}>
-              <img src={item.image} alt={item.name} />
+            <article className="cart-item" key={item.id} data-aos="fade-up">
+              <img
+                src={item.image}
+                alt={item.name}
+                onError={(event) => {
+                  event.currentTarget.onerror = null;
+                  event.currentTarget.src = "/logo.png";
+                }}
+              />
               <div className="cart-item-info">
                 <h2>{item.name}</h2>
                 <p>{formatPrice(item.price)} por unidad</p>
@@ -63,7 +70,7 @@ export default function Cart({ cart, onUpdateQuantity, onRemove }) {
           ))}
         </div>
 
-        <aside className="cart-summary">
+        <aside className="cart-summary" data-aos="fade-left">
           <h2>Resumen del pedido</h2>
           <div className="summary-line">
             <span>Productos</span>

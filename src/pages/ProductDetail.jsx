@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { products } from "../data/products";
+import Product360Viewer from "../components/Product360Viewer";
 
 const formatPrice = (price) =>
   new Intl.NumberFormat("es-CO", {
@@ -32,16 +33,7 @@ export default function ProductDetail({ onAddToCart }) {
       </button>
 
       <div className="product-detail-layout">
-        <div className="product-detail-image">
-          <img
-            src={product.image}
-            alt={product.name}
-            onError={(event) => {
-              event.currentTarget.onerror = null;
-              event.currentTarget.src = "/logo.png";
-            }}
-          />
-        </div>
+        <Product360Viewer product={product} />
 
         <div className="product-detail-content">
           <span className="section-label">{categoryName}</span>
