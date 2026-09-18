@@ -11,7 +11,8 @@ export default function Home() {
 
   useLayoutEffect(() => {
     const home = homeRef.current;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      || window.matchMedia("(max-width: 768px)").matches;
 
     if (!home || reduceMotion) return undefined;
 

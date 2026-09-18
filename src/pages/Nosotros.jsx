@@ -34,6 +34,8 @@ export default function Nosotros() {
   const teamRef = useRef(null);
 
   useLayoutEffect(() => {
+    if (window.matchMedia("(max-width: 768px)").matches) return undefined;
+
     const context = gsap.context(() => {
       gsap.utils.toArray(".team-card").forEach((card) => {
         const path = card.querySelector(".team-svg-path");

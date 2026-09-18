@@ -1843,6 +1843,134 @@ html {
     padding: 14px;
   }
 }
+
+@media (max-width: 320px) {
+  [data-aos],
+  [data-aos].aos-animate,
+  .team-reveal {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .navbar {
+    min-height: 62px;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .logo {
+    gap: 5px;
+  }
+
+  .logo img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .logo span {
+    max-width: 94px;
+    font-size: 12px;
+    line-height: 1.05;
+  }
+
+  .menu-toggle {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+  }
+
+  .hero-banner {
+    min-height: 0;
+    padding: 30px 12px 28px;
+    align-items: flex-start;
+  }
+
+  .hero-logo,
+  .hero-spark {
+    display: none;
+  }
+
+  .overlay {
+    width: 100%;
+    padding: 8px 4px 0;
+  }
+
+  .eyebrow {
+    max-width: 100%;
+    margin-bottom: 14px;
+    padding: 6px 0;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+
+  .overlay h1 {
+    max-width: 100%;
+    font-size: clamp(2.15rem, 17vw, 2.8rem);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .overlay p {
+    margin-bottom: 18px;
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .hero-buttons {
+    display: grid;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    margin: 0;
+    padding: 11px 8px;
+    font-size: 0.82rem;
+  }
+
+  .categories-modern {
+    padding: 32px 12px 40px;
+  }
+
+  .categories-modern h2 {
+    font-size: 1.45rem;
+    line-height: 1.1;
+  }
+
+  .categories-scroll {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .cat-item {
+    width: 100%;
+    flex-basis: auto;
+    min-height: 148px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  [data-aos],
+  [data-aos].aos-init,
+  [data-aos].aos-animate,
+  .team-reveal {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}
 .stats-section {
   text-align: center;
   padding: 80px 20px;
@@ -2119,17 +2247,17 @@ html {
   }
 
   .categories-scroll {
-    display: flex;
-    grid-auto-columns: minmax(172px, 76vw);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 14px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
+    overflow: visible;
   }
 
   .cat-item {
-    flex: 0 0 min(76vw, 280px);
+    width: 100%;
+    flex: none;
     min-height: 176px;
+    scroll-snap-align: none;
   }
 
   .footer {

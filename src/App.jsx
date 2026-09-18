@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import AOS from "aos";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
@@ -13,6 +14,24 @@ import Variedad from "./pages/Variedad";
 import Precios from "./pages/Precios";
 import Envios from "./pages/Envios";
 import Calidad from "./pages/Calidad";
+
+function RouteAnimationRefresh() {
+  const location = useLocation();
+
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+      once: false,
+      mirror: true,
+      offset: 40,
+      easing: "ease-out-cubic",
+      delay: 80,
+    });
+    AOS.refreshHard();
+  }, [location.pathname, location.search]);
+
+  return null;
+}
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -64,6 +83,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <RouteAnimationRefresh />
       <div className="app-shell">
         <Navbar cartCount={cart.reduce((total, item) => total + item.quantity, 0)} />
 

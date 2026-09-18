@@ -9,14 +9,21 @@ export default function Navbar({ cartCount }) {
   useLayoutEffect(() => {
     if (!menuRef.current) return undefined;
 
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    if (isMobile) {
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+
     const menuItems = menuRef.current.querySelectorAll("a");
     gsap.fromTo(
       menuItems,
       { y: -12, autoAlpha: 0 },
       { y: 0, autoAlpha: 1, duration: 0.35, stagger: 0.06, ease: "power2.out" }
     );
-
-    document.body.style.overflow = menuOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
