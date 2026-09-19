@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const WHATSAPP_NUMBER = "573226075952";
 const WHOLESALE_THRESHOLD = 12;
@@ -12,7 +12,8 @@ const formatPrice = (price) =>
     maximumFractionDigits: 0,
   }).format(price);
 
-export default function Cart({ cart, onUpdateQuantity, onRemove }) {
+export default function Cart({ cart, onUpdateQuantity, onRemove, isAuthenticated }) {
+  const navigate = useNavigate();
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const wholesaleQuantity = cart
     .filter((item) => WHOLESALE_CATEGORIES.has(item.category))
@@ -26,6 +27,11 @@ export default function Cart({ cart, onUpdateQuantity, onRemove }) {
   const total = subtotal - wholesaleDiscount;
 
   const sendOrderToWhatsApp = () => {
+    if (!isAuthenticated) {
+      navigate("/iniciar-sesion", { state: { from: "/carrito" } });
+      return;
+    }
+
     const productsMessage = cart
       .map((item) => `- ${item.name} x${item.quantity}: ${formatPrice(item.price * item.quantity)}`)
       .join("\n");
@@ -109,7 +115,7 @@ export default function Cart({ cart, onUpdateQuantity, onRemove }) {
           </p>
           <p>El valor del envío se confirma por WhatsApp según tu ubicación.</p>
           <button type="button" className="btn btn-whatsapp checkout-button" onClick={sendOrderToWhatsApp}>
-            Comprar por WhatsApp
+            {isAuthenticated ? "Comprar por WhatsApp" : "Iniciar sesión para comprar"}
           </button>
         </aside>
       </div>

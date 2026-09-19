@@ -1,13 +1,20 @@
 import { useLayoutEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { categories } from "../data/categories";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Home() {
+export default function Home({ isAuthenticated }) {
   const homeRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleWhatsAppPurchase = (event) => {
+    if (isAuthenticated) return;
+    event.preventDefault();
+    navigate("/iniciar-sesion", { state: { from: "/carrito" } });
+  };
 
   useLayoutEffect(() => {
     const home = homeRef.current;
@@ -135,6 +142,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-whatsapp"
+                onClick={handleWhatsAppPurchase}
               >
                 Comprar por WhatsApp
               </a>

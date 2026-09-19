@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 
-export default function Navbar({ cartCount }) {
+export default function Navbar({ cartCount, customer, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -67,6 +67,13 @@ export default function Navbar({ cartCount }) {
           <Link to="/nosotros" onClick={closeMenu}><span>Nosotros</span><i aria-hidden="true">?</i></Link>
           <Link to="/productos" onClick={closeMenu}><span>Productos</span><i aria-hidden="true">▣</i></Link>
           <Link to="/contacto" onClick={closeMenu}><span>Contacto</span><i aria-hidden="true">✉</i></Link>
+          {customer ? (
+            <button className="nav-session-button" type="button" onClick={onLogout}>
+              <span>Salir</span><i aria-hidden="true">↪</i>
+            </button>
+          ) : (
+            <Link to="/iniciar-sesion" onClick={closeMenu}><span>Iniciar sesión</span><i aria-hidden="true">♙</i></Link>
+          )}
           <Link to="/carrito" className="cart-link" aria-label={`Carrito con ${cartCount} productos`} onClick={closeMenu}>
             <span>Carrito</span>
             <span className="cart-icon-wrap">

@@ -14,6 +14,8 @@ import Variedad from "./pages/Variedad";
 import Precios from "./pages/Precios";
 import Envios from "./pages/Envios";
 import Calidad from "./pages/Calidad";
+import CustomerAuth from "./pages/CustomerAuth";
+import { getCustomerSession, logoutCustomer } from "./auth/customerAuth";
 
 function RouteAnimationRefresh() {
   const location = useLocation();
@@ -34,6 +36,7 @@ function RouteAnimationRefresh() {
 }
 
 function App() {
+  const [customer, setCustomer] = useState(getCustomerSession);
   const [cart, setCart] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("la-bodega-carrito")) || [];
@@ -85,11 +88,18 @@ function App() {
     <BrowserRouter>
       <RouteAnimationRefresh />
       <div className="app-shell">
-        <Navbar cartCount={cart.reduce((total, item) => total + item.quantity, 0)} />
+        <Navbar
+          cartCount={cart.reduce((total, item) => total + item.quantity, 0)}
+          customer={customer}
+          onLogout={() => {
+            logoutCustomer();
+            setCustomer(null);
+          }}
+        />
 
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home isAuthenticated={Boolean(customer)} />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/productos" element={<Productos onAddToCart={addToCart} />} />
             <Route path="/productos/:productId" element={<ProductDetail onAddToCart={addToCart} />} />
@@ -100,6 +110,7 @@ function App() {
                   cart={cart}
                   onUpdateQuantity={updateQuantity}
                   onRemove={removeFromCart}
+                  isAuthenticated={Boolean(customer)}
                 />
               }
             />
@@ -108,6 +119,14 @@ function App() {
             <Route path="/precios" element={<Precios />} />
             <Route path="/envios" element={<Envios />} />
             <Route path="/calidad" element={<Calidad />} />
+            <Route
+              path="/iniciar-sesion"
+              element={<CustomerAuth onAuthenticated={setCustomer} />}
+            />
+            <Route
+              path="/registrarse"
+              element={<CustomerAuth mode="register" onAuthenticated={setCustomer} />}
+            />
           </Routes>
         </main>
 

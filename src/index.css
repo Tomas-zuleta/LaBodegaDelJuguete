@@ -126,6 +126,25 @@ body {
   color: #d5ff46;
 }
 
+.nav-session-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.72);
+  cursor: pointer;
+  font: inherit;
+  font-size: .86rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+.nav-session-button:hover {
+  color: #d5ff46;
+}
+
 .menu-toggle {
   display: block;
   position: relative;
@@ -2822,4 +2841,137 @@ html {
 
 .footer-section h3 {
   color: #ff6b6b;
+}
+
+/* ================= CUSTOMER AUTH ================= */
+.customer-auth-page {
+  display: grid;
+  min-height: 680px;
+  place-items: center;
+  padding: clamp(36px, 7vw, 88px) clamp(16px, 5vw, 72px);
+  background: #101214;
+  color: #f3f7ff;
+}
+
+.customer-auth-card {
+  width: min(100%, 480px);
+  padding: clamp(24px, 5vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: #20252a;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+}
+
+.customer-auth-card h1 {
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.customer-auth-card > p {
+  color: rgba(243, 247, 255, 0.68);
+  line-height: 1.6;
+}
+
+.customer-auth-form {
+  display: grid;
+  gap: 9px;
+  margin-top: 26px;
+}
+
+.customer-auth-form label {
+  color: #f3f7ff;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.customer-auth-form input {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: #101214;
+  color: #ffffff;
+  font: inherit;
+}
+
+.customer-auth-form input:focus {
+  outline: 2px solid #d5ff46;
+  outline-offset: 2px;
+}
+
+.customer-password-field {
+  position: relative;
+}
+
+.customer-password-field input {
+  padding-right: 48px;
+}
+
+.customer-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #d5ff46;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transform: translateY(-50%);
+}
+
+.customer-password-toggle:hover,
+.customer-password-toggle:focus-visible {
+  background: rgba(213, 255, 70, 0.12);
+}
+
+.customer-auth-submit {
+  width: 100%;
+  margin: 8px 0 0;
+}
+
+.customer-auth-error,
+.customer-auth-success {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.customer-auth-error {
+  color: #ff8b78 !important;
+}
+
+.customer-auth-success {
+  color: #d5ff46 !important;
+  font-weight: 700;
+}
+
+.customer-auth-switch {
+  margin-top: 22px;
+}
+
+.customer-auth-switch a,
+.customer-auth-back {
+  color: #d5ff46;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.customer-auth-back {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .nav-session-button {
+    width: 100%;
+    min-height: 58px;
+    justify-content: space-between;
+    color: rgba(255,255,255,.82);
+    font-size: clamp(1.25rem, 7vw, 2rem);
+  }
 }
